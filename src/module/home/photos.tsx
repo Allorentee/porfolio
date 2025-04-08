@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import Image from 'next/image'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
+import image1 from '@/assets/images/photos/image-1.jpg'
+import image2 from '@/assets/images/photos/image-2.jpg'
+import image3 from '@/assets/images/photos/image-3.jpg'
+import image4 from '@/assets/images/photos/image-4.jpg'
+import image5 from '@/assets/images/photos/image-5.jpg'
 
 export function Photos() {
   let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']

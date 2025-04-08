@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Card } from '@/components/card'
 import { SimpleLayout } from '@/components/layouts/simple-layout'
-import logoMenuvision from '@/images/logos/menuvision.png'
+import logoMenuvision from '@/assets/images/logos/menuvision.png'
 const projects = [
   {
     name: 'Menuvision - Backoffice',

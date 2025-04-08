@@ -1,12 +1,14 @@
+'use client'
 import { ArrowDownIcon } from '@/components/icons/arrow-down'
 
 import { Button } from '@/components/button'
 import Image, { ImageProps } from 'next/image'
-import logoIPGlobal from '@/images/logos/ipglobal.jpeg'
-import logoAedasHomes from '@/images/logos/aedas.svg'
-import logoMenuvision from '@/images/logos/menuvision.png'
-import logoLisDataSolutions from '@/images/logos/lis.svg'
+import logoIPGlobal from '@/assets/images/logos/ipglobal.jpeg'
+import logoAedasHomes from '@/assets/images/logos/aedas.svg'
+import logoMenuvision from '@/assets/images/logos/menuvision.png'
+import logoLisDataSolutions from '@/assets/images/logos/lis.svg'
 import { BriefcaseIcon } from '@/components/icons/briefcase'
+import { downloadPDF } from '@/utils/download'
 
 interface Role {
   company: string
@@ -44,8 +46,8 @@ function Role({ role }: { role: Role }) {
           className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
           aria-label={`${startLabel} hasta ${endLabel}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
+          <time dateTime={startDate}>{startLabel}</time>
+          <span aria-hidden="true">—</span>
           <time dateTime={endDate}>{endLabel}</time>
         </dd>
       </dl>
@@ -54,7 +56,7 @@ function Role({ role }: { role: Role }) {
 }
 
 export function Resume() {
-  let resume: Array<Role> = [
+  const resume: Array<Role> = [
     {
       company: 'IPGlobal',
       title: 'Frontend Developer',
@@ -86,8 +88,8 @@ export function Resume() {
       company: 'Lis data solutions',
       title: 'Frontend Developer',
       logo: logoLisDataSolutions,
-      start: '2022',
-      end: '2024',
+      start: '2021',
+      end: '2023',
     },
   ]
 
@@ -102,7 +104,11 @@ export function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+      <Button
+        onClick={() => downloadPDF('/cv.pdf')}
+        variant="secondary"
+        className="group mt-6 w-full cursor-pointer"
+      >
         Descargar CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>

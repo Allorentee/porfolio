@@ -14,7 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/container'
-import avatarImage from '@/images/avatar.jpeg'
+import avatarImage from '@/assets/images/avatar.jpeg'
 import { NAVIGATION } from '@/constants/navigation'
 import { SunIcon } from '@/components/icons/sun'
 import { MoonIcon } from '@/components/icons/moon'
