@@ -1,14 +1,10 @@
 export const NAVIGATION = [
   {
-    name: 'Home',
+    name: 'Experiencia',
     href: '/',
   },
   {
     name: 'Proyectos',
     href: '/projects',
-  },
-  {
-    name: 'Técnologías',
-    href: '/uses',
   },
 ]

@@ -4,13 +4,13 @@ import { SocialLink } from '@/components/social-link'
 
 import { Resume } from '@/module/home/resume'
 import { Photos } from '@/module/home/photos'
-import image1 from '@/assets/images/photos/image-1.jpg'
-import image2 from '@/assets/images/demo.png'
-import image3 from '@/assets/images/photos/image-3.jpg'
-import image4 from '@/assets/images/photos/mock-earthquakes.png'
+import image1 from '@/assets/images/photos/main.jpg'
+import image2 from '@/assets/images/photos/hans.jpg'
+import image3 from '@/assets/images/photos/hymym.jpg'
+import image4 from '@/assets/images/photos/image-3.jpg'
 import image5 from '@/assets/images/photos/image-4.jpg'
 export default async function Home() {
-  const photos = [image1, image2, image3, image4, image5]
+  const photos = [image4, image2, image1, image3, image5]
   return (
     <>
       <Container className="mt-9">

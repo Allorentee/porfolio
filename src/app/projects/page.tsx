@@ -5,11 +5,12 @@ import { Card } from '@/components/card'
 import { SimpleLayout } from '@/components/layouts/simple-layout'
 import logoMenuvision from '@/assets/images/logos/menuvision.jpg'
 import logoEarthquake from '@/assets/images/logos/earthquakes.png'
+
 const projects = [
   {
     name: 'Menuvision - Backoffice',
     description:
-      'Backoffice para la gestion de la carta QR, permite añadir, editar y eliminar productos, categorías, etc. Actualmente requiere de autenticación para acceder, pero estaré encantado de mostrarlo.',
+      'Backoffice para la gestión de la carta QR, permite añadir, editar y eliminar productos, categorías, etc. Actualmente requiere de autenticación para acceder, pero estaré encantado de mostrarlo.',
     link: {
       href: 'https://qr.menuvision.es/demo/backoffice',
       label: 'backoffice.menuvision.es',
@@ -19,7 +20,7 @@ const projects = [
   {
     name: 'Menuvision - App',
     description:
-      'Cartas QR interactivas para restaurantes, disponible solo versión movil, actualmente la vista web esta en desarrollo.',
+      'Cartas QR interactivas para restaurantes, disponible solo versión movil, actualmente la vista web está en desarrollo.',
     link: {
       href: 'https://qr.menuvision.es/demo',
       label: 'qr.menuvision.es',
@@ -28,8 +29,7 @@ const projects = [
   },
   {
     name: 'Menuvision - Landing Page',
-    description:
-      'Landing Page para la empresa Menuvision, un sistema de gestión de menús y reservas.',
+    description: 'Landing page para la presentación del SAAS Menuvisión.',
     link: { href: 'https://menuvision.es', label: 'menuvision.es' },
     logo: logoMenuvision,
   },
