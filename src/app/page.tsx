@@ -2,15 +2,15 @@ import { Container } from '@/components/container'
 import { GitHubIcon, LinkedInIcon } from '@/components/icons/social-icons'
 import { SocialLink } from '@/components/social-link'
 
-import { getAllArticles } from '@/lib/articles'
-import { Article } from '@/components/article'
-
 import { Resume } from '@/module/home/resume'
 import { Photos } from '@/module/home/photos'
-
+import image1 from '@/assets/images/photos/image-1.jpg'
+import image2 from '@/assets/images/demo.png'
+import image3 from '@/assets/images/photos/image-3.jpg'
+import image4 from '@/assets/images/photos/mock-earthquakes.png'
+import image5 from '@/assets/images/photos/image-4.jpg'
 export default async function Home() {
-  let articles = (await getAllArticles()).slice(0, 4)
-
+  const photos = [image1, image2, image3, image4, image5]
   return (
     <>
       <Container className="mt-9">
@@ -37,7 +37,7 @@ export default async function Home() {
           </div>
         </div>
       </Container>
-      <Photos />
+      <Photos photos={photos} />
       <Container className="mt-24 md:mt-28">
         <Resume />
       </Container>

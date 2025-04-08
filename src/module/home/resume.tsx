@@ -3,10 +3,10 @@ import { ArrowDownIcon } from '@/components/icons/arrow-down'
 
 import { Button } from '@/components/button'
 import Image, { ImageProps } from 'next/image'
-import logoIPGlobal from '@/assets/images/logos/ipglobal.jpeg'
-import logoAedasHomes from '@/assets/images/logos/aedas.svg'
-import logoMenuvision from '@/assets/images/logos/menuvision.png'
-import logoLisDataSolutions from '@/assets/images/logos/lis.svg'
+import logoIPGlobal from '@/assets/images/logos/ipglobal.png'
+import logoAedasHomes from '@/assets/images/logos/aedas.png'
+import logoMenuvision from '@/assets/images/logos/menuvision.jpg'
+import logoLisDataSolutions from '@/assets/images/logos/lis.png'
 import { BriefcaseIcon } from '@/components/icons/briefcase'
 import { downloadPDF } from '@/utils/download'
 
@@ -17,6 +17,7 @@ interface Role {
   start: string | { label: string; dateTime: string }
   end: string | { label: string; dateTime: string }
   bulletPoints: string[]
+  images?: { src: ImageProps['src']; alt: string }[]
 }
 
 function Role({ role }: { role: Role }) {
@@ -30,9 +31,12 @@ function Role({ role }: { role: Role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
-      </div>
+      <Image
+        src={role.logo}
+        alt=""
+        className="h-10 w-10 rounded-full object-cover"
+        unoptimized
+      />
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Empresa</dt>
         <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
@@ -125,13 +129,16 @@ export function Resume() {
         <BriefcaseIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Experiencia</span>
       </h2>
-      <ol className="mt-6 space-y-4">
+      <ol className="mt-6 space-y-6">
         {resume.map((role, roleIndex) => (
           <div key={roleIndex}>
             <Role key={roleIndex} role={role} />
             <ul className="mt-2 flex flex-col gap-2">
               {role.bulletPoints.map((bulletPoint, bulletPointIndex) => (
-                <li className="text-sm" key={bulletPointIndex}>
+                <li
+                  className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-200"
+                  key={bulletPointIndex}
+                >
                   - {bulletPoint}
                 </li>
               ))}
@@ -141,7 +148,7 @@ export function Resume() {
       </ol>
       <Button
         onClick={() => downloadPDF('/cv.pdf')}
-        variant="yellow"
+        variant="primary"
         className="group mt-6 w-full cursor-pointer"
       >
         Descargar CV

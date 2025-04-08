@@ -3,12 +3,13 @@ import Image from 'next/image'
 
 import { Card } from '@/components/card'
 import { SimpleLayout } from '@/components/layouts/simple-layout'
-import logoMenuvision from '@/assets/images/logos/menuvision.png'
+import logoMenuvision from '@/assets/images/logos/menuvision.jpg'
+import logoEarthquake from '@/assets/images/logos/earthquakes.png'
 const projects = [
   {
     name: 'Menuvision - Backoffice',
     description:
-      'Backoffice para la empresa Menuvision, un sistema de gestión de menús y reservas.',
+      'Backoffice para la gestion de la carta QR, permite añadir, editar y eliminar productos, categorías, etc. Actualmente requiere de autenticación para acceder, pero estaré encantado de mostrarlo.',
     link: {
       href: 'https://qr.menuvision.es/demo/backoffice',
       label: 'backoffice.menuvision.es',
@@ -18,10 +19,10 @@ const projects = [
   {
     name: 'Menuvision - App',
     description:
-      'App para la empresa Menuvision, un sistema de gestión de menús y reservas.',
+      'Cartas QR interactivas para restaurantes, disponible solo versión movil, actualmente la vista web esta en desarrollo.',
     link: {
       href: 'https://qr.menuvision.es/demo',
-      label: 'qr.menuvision.es (Abrir en dispositivos moviles)',
+      label: 'qr.menuvision.es',
     },
     logo: logoMenuvision,
   },
@@ -34,13 +35,14 @@ const projects = [
   },
   {
     name: 'Earthquake App',
+    developedAt: '2022',
     description:
       'Visualizador de sismos en tiempo real, con posibilidad de filtrar por magnitud y profundidad.',
     link: {
       href: 'https://earthquakes-map.vercel.app/',
       label: 'earthquakes-map.vercel.app',
     },
-    logo: logoMenuvision,
+    logo: logoEarthquake,
   },
 ]
 
@@ -64,7 +66,7 @@ export default function Projects() {
   return (
     <SimpleLayout
       title="Cosas que he hecho intentando poner mi huella en el universo."
-      intro="Principalmente son proyectos personales, pero también he trabajado en algunos proyectos profesionales, entre ellos está el proyecto completo de menuvision, un sass completo que permite generar cartas QR para restaurantes."
+      intro="Principalmente son proyectos personales, y aunque haya hecho más proyectos sobre pruebas y aprendizaje, estos son los que me gustaría destacar."
     >
       <ul
         role="list"
@@ -72,14 +74,13 @@ export default function Projects() {
       >
         {projects.map((project) => (
           <Card as="li" key={project.name}>
-            <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image
-                src={project.logo}
-                alt=""
-                className="h-8 w-8"
-                unoptimized
-              />
-            </div>
+            <Image
+              src={project.logo}
+              alt=""
+              className="h-10 w-10 rounded-full object-cover"
+              unoptimized
+            />
+
             <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
               <Card.Link href={project.link.href}>{project.name}</Card.Link>
             </h2>
