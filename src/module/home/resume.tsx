@@ -16,6 +16,7 @@ interface Role {
   logo: ImageProps['src']
   start: string | { label: string; dateTime: string }
   end: string | { label: string; dateTime: string }
+  bulletPoints: string[]
 }
 
 function Role({ role }: { role: Role }) {
@@ -58,16 +59,6 @@ function Role({ role }: { role: Role }) {
 export function Resume() {
   const resume: Array<Role> = [
     {
-      company: 'IPGlobal',
-      title: 'Frontend Developer',
-      logo: logoIPGlobal,
-      start: '2024',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
-    {
       company: 'Menuvision',
       title: 'Fundador, Frontend Developer, UI/UX Designer',
       logo: logoMenuvision,
@@ -76,13 +67,44 @@ export function Resume() {
         label: 'Present',
         dateTime: new Date().getFullYear().toString(),
       },
+      bulletPoints: [
+        'Montamos la aplicación en un servidor propio, añadiendo un flujo de CI/CD y Kubernetes.',
+        'He realizado el diseño de la aplicación y la interfaz de usuario. con Figma. e implementado el diseño en la aplicación.',
+        'Desarrollo de una aplicación web para uso exclusivo movil enfrentándome a la compatibilidad entre diversos navegadores y sistemas operativos.',
+        'Desarrollo de un backoffice de gestión para el restaurante de alto rendimiento capaz de actualizar cada producto de la aplicación en tiempo real.',
+        'Landing page estática desarrollada con astro para un mejor posicionamiento SEO y rendimiento.',
+      ],
     },
+    {
+      company: 'IPGlobal',
+      title: 'Frontend Developer',
+      logo: logoIPGlobal,
+      start: '2024',
+      end: {
+        label: 'Present',
+        dateTime: new Date().getFullYear().toString(),
+      },
+      bulletPoints: [
+        'Optimizaciones de aplicaciones trabajadas bajando un 40% el bundle de los proyectos y aumentando el rendimiento en producción.',
+        'Migración completa de una aplicación desarrollada en webpack a vite y actualización de todo el paquete de dependencias mejorando la experiencia de desarrollo para el resto del equipo.',
+        'Aplicacíon de un patrón de diseño cacheando modulos para evitar re-renderizados innecesarios y aumentar el rendimiento de la aplicación.',
+        'Implementación parcial del flujo de un carrito de compra.',
+      ],
+    },
+
     {
       company: 'Aedas Homes',
       title: 'Frontend Developer',
       logo: logoAedasHomes,
       start: '2023',
       end: '2024',
+      bulletPoints: [
+        'Desarrollos para multiples proyectos de la empresa de diversos ambitos.',
+        'Implementación de websocket para la comunicación entre el cliente y el servidor.',
+        'Implementación de organigramas en una de las aplicaciones.',
+        'Uso de la librería mapbox para la visualización de mapas.',
+        'Implementación parcial de microfrontends para la autorización de usuarios.',
+      ],
     },
     {
       company: 'Lis data solutions',
@@ -90,6 +112,10 @@ export function Resume() {
       logo: logoLisDataSolutions,
       start: '2021',
       end: '2023',
+      bulletPoints: [
+        'Implementación de diseño para una aplicación web, chatbot con IA.',
+        'Optimización y actualizacion de codigo de aplicaciones web antiguas.',
+      ],
     },
   ]
 
@@ -101,12 +127,21 @@ export function Resume() {
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
+          <div key={roleIndex}>
+            <Role key={roleIndex} role={role} />
+            <ul className="mt-2 flex flex-col gap-2">
+              {role.bulletPoints.map((bulletPoint, bulletPointIndex) => (
+                <li className="text-sm" key={bulletPointIndex}>
+                  - {bulletPoint}
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
       </ol>
       <Button
         onClick={() => downloadPDF('/cv.pdf')}
-        variant="secondary"
+        variant="yellow"
         className="group mt-6 w-full cursor-pointer"
       >
         Descargar CV
