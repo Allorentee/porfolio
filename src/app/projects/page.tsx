@@ -12,7 +12,7 @@ const projects = [
     description:
       'Backoffice para la gestión de la carta QR, permite añadir, editar y eliminar productos, categorías, etc. Actualmente requiere de autenticación para acceder, pero estaré encantado de mostrarlo.',
     link: {
-      href: 'https://qr.menuvision.es/demo/backoffice',
+      href: 'https://qr.menuvision.es/backoffice',
       label: 'backoffice.menuvision.es',
     },
     logo: logoMenuvision,
