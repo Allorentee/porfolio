@@ -22,7 +22,7 @@ const projects = [
     description:
       'Cartas QR interactivas para restaurantes, disponible solo versión movil, actualmente la vista web está en desarrollo.',
     link: {
-      href: 'https://qr.menuvision.es/ee35b807-c81a-474b-84c3-c561eacfa8dc',
+      href: 'https://qr.menuvision.es/cf6911fd-c795-4f59-a00a-99a9ff75ea67',
       label: 'qr.menuvision.es',
     },
     logo: logoMenuvision,
