@@ -71,6 +71,9 @@ export function Portfolio() {
   const [shownId, setShownId] = useState<string | null>(null)
   // True when the panel opens from the centred state, so its content waits for the column to slide.
   const [fromClosed, setFromClosed] = useState(false)
+  // Bumped on every open so reopening the same experience still remounts the detail
+  // and replays its delayed entry, instead of showing it under the sliding column.
+  const [openCount, setOpenCount] = useState(0)
   const shown = experiences.find((e) => e.id === shownId) ?? null
   const open = selectedId !== null
 
@@ -79,6 +82,7 @@ export function Portfolio() {
       setSelectedId(null)
       return
     }
+    if (selectedId === null) setOpenCount((n) => n + 1)
     setFromClosed(selectedId === null)
     setSelectedId(id)
     setShownId(id)
@@ -186,7 +190,9 @@ export function Portfolio() {
           inert={!open}
         >
           {/* `key` remounts the detail on each selection so its entry animation replays. */}
-          {shown && <Detail key={shown.id} experience={shown} />}
+          {shown && (
+            <Detail key={`${shown.id}-${openCount}`} experience={shown} />
+          )}
         </aside>
       </main>
     </div>

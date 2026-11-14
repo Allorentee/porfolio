@@ -308,20 +308,27 @@ button:focus-visible {
  * Wrapped (narrow) layouts stack vertically, so there's nothing to centre.
  */
 .column {
-  transition: transform 450ms var(--ease-in-out);
+  transition: transform 400ms var(--ease-in-out);
 }
 
+/*
+ * Centred, the column overlaps the panel area by ~142px of its 230px travel.
+ * Choreography so the two never show on top of each other:
+ *  - Open: the column clears the panel at ~205ms on this curve, so the content
+ *    waits 230ms (it's remounted on every open, so the delay always applies).
+ *  - Close: the panel fades out in 120ms; the column doesn't reach the panel
+ *    area until ~165ms.
+ */
 .aside {
-  transition: opacity 150ms var(--ease-out);
+  transition: opacity 120ms var(--ease-out);
 }
 
 .layout[data-open='false'] .aside {
   opacity: 0;
 }
 
-/* Opening from the centred state: let the column travel before the content settles in. */
 .aside[data-from-closed='true'] .detail > * {
-  animation-delay: calc(var(--i, 0) * 40ms + 180ms);
+  animation-delay: calc(var(--i, 0) * 40ms + 230ms);
 }
 
 @container (min-width: 728px) {
