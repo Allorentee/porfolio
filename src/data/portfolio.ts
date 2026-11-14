@@ -56,7 +56,7 @@ export const experiences: Experience[] = [
   {
     id: 'aedas',
     company: 'Aedas Homes',
-    role: 'Desarrollador frontend',
+    role: 'Frontend',
     period: '2023–2024',
     periodLong: '2023 – 2024',
     summary:
