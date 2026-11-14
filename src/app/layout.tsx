@@ -1,23 +1,19 @@
-import { type Metadata } from 'next'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-import { Providers } from '@/app/providers'
-import { Layout } from '@/components/layout'
+import './globals.css'
 
-import '@/styles/tailwind.css'
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s - Alvaro Llorente',
-    default:
-      'Alvaro Llorente - Software designer, founder, and amateur astronaut',
-  },
+  title: 'Alvaro Llorente',
   description:
-    'Alvaro Llorente - Descubre mi mundo, mi pasión y mi trabajo. Soy un desarrollador web y apasionado por la tecnología y el diseño. ',
-  alternates: {
-    types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-    },
-  },
+    'Alvaro Llorente, desarrollador full-stack en Segovia. Construyo producto de principio a fin, de la autenticación al último píxel.',
 }
 
 export default function RootLayout({
@@ -26,14 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
-        <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
-        </Providers>
-      </body>
+    <html lang="es" className={inter.variable}>
+      <body>{children}</body>
     </html>
   )
 }

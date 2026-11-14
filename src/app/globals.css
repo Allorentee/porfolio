@@ -1,0 +1,351 @@
+:root {
+  --bg: #faf8f5;
+  --fg: #1c1612;
+  --muted: #6f645b;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Underline on hover only where hover exists — touch would leave it stuck after a tap. */
+@media (hover: hover) and (pointer: fine) {
+  a:hover,
+  button:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Layout ---------- */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 24px;
+}
+
+.layout {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px 88px;
+}
+
+.column {
+  flex: 0 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.aside {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding-top: 6px;
+}
+
+/* ---------- Type ---------- */
+
+.muted {
+  color: var(--muted);
+}
+
+.strong {
+  font-weight: 400;
+}
+
+.nums {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.pretty {
+  min-width: 0;
+  text-wrap: pretty;
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Left column ---------- */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.intro-head,
+.detail-head {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.intro-text {
+  max-width: 340px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  margin: -4.5px 0;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 4.5px 0;
+}
+
+.row-main {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.dot {
+  flex: none;
+  align-self: center;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--fg);
+}
+
+.arrow {
+  flex: none;
+  color: var(--muted);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+}
+
+.contact-links a {
+  padding: 12px 0;
+}
+
+/* ---------- Detail panel ---------- */
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bullets {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bullets li {
+  display: flex;
+  gap: 10px;
+}
+
+.bullets li > :first-child {
+  flex: none;
+}
+
+/* ---------- Motion ---------- */
+
+/*
+ * Page entry — seen once per visit, so it can take its time.
+ * Blocks rise 8px and fade in, staggered 70ms by their --i.
+ */
+.reveal {
+  animation: rise 600ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+}
+
+/*
+ * Detail panel — replays on every selection (the panel is remounted).
+ * Short and small: it bridges the content swap without making the reader wait.
+ */
+.detail > * {
+  animation: settle 240ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+/* Active indicator — a quick grow from 50%, never from zero. */
+.dot {
+  animation: pop 160ms var(--ease-out) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/*
+ * Open / close.
+ * With nothing selected the column sits centred in the layout; opening a detail
+ * slides it back to its place on the left. Only `transform` moves, so the layout
+ * itself never changes and the panel already has its final position.
+ * Wrapped (narrow) layouts stack vertically, so there's nothing to centre.
+ */
+.column {
+  transition: transform 450ms var(--ease-in-out);
+}
+
+.aside {
+  transition: opacity 150ms var(--ease-out);
+}
+
+.layout[data-open='false'] .aside {
+  opacity: 0;
+}
+
+/* Opening from the centred state: let the column travel before the content settles in. */
+.aside[data-from-closed='true'] .detail > * {
+  animation-delay: calc(var(--i, 0) * 40ms + 180ms);
+}
+
+@container (min-width: 728px) {
+  .layout[data-open='false'] .column {
+    /* 100cqw = layout width, 100% = column width → offset that centres the column. */
+    transform: translateX(calc((100cqw - 100%) / 2));
+  }
+}
+
+@container (max-width: 727.98px) {
+  .layout[data-open='false'] .aside {
+    display: none;
+  }
+}
+
+/* Reduced motion: same timing, opacity only — no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .detail > *,
+  .dot {
+    animation-name: fade;
+  }
+
+  .column {
+    transition: none;
+  }
+}
