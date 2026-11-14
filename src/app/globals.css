@@ -390,6 +390,20 @@ button:focus-visible {
 }
 
 @container (min-width: 728px) {
+  /*
+   * Side by side, only the column decides the layout's height, so the page stays
+   * centred on it whatever is open. The panel takes no height and its content
+   * hangs from the top of the column, growing downwards (and extending the page
+   * scroll when it's long) without moving anything else.
+   */
+  .aside {
+    height: 0;
+  }
+
+  .aside .detail {
+    padding-bottom: 72px;
+  }
+
   .layout[data-open='false'] .column {
     /* 100cqw = layout width, 100% = column width → offset that centres the column. */
     transform: translateX(calc((100cqw - 100%) / 2));
