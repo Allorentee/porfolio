@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Alvaro Llorente',
   description:
-    'Alvaro Llorente, desarrollador full-stack en Segovia. Construyo producto de principio a fin, del planteamiento al último píxel.',
+    'Alvaro Llorente, ingeniero de IA en Embermind. Construyo producto de principio a fin, del planteamiento al último píxel.',
 }
 
 export default function RootLayout({

@@ -26,7 +26,7 @@ export type Project = {
 
 export const profile = {
   name: 'Alvaro Llorente',
-  headline: 'Ingeniero de IA en Embermind · Segovia',
+  headline: 'Ingeniero de IA en Embermind',
   intro:
     'Construyo producto de principio a fin, del planteamiento al último píxel.',
 }
