@@ -12,6 +12,25 @@ import {
 
 const order = (i: number) => ({ '--i': i }) as CSSProperties
 
+function Chevron() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="chevron"
+      width="10"
+      height="10"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 3.5L10.5 8L6 12.5" />
+    </svg>
+  )
+}
+
 function ArrowUpRight() {
   return (
     <svg
@@ -125,7 +144,10 @@ export function Portfolio() {
                         <span className="muted">{experience.role}</span>
                       </span>
                     </span>
-                    <span className="muted nums">{experience.period}</span>
+                    <span className="row-end">
+                      <span className="muted nums">{experience.period}</span>
+                      <Chevron />
+                    </span>
                   </button>
                 )
               })}

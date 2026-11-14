@@ -201,6 +201,33 @@ button:focus-visible {
   color: var(--muted);
 }
 
+/* Experience rows open a detail: a chevron next to the year says so, on every device. */
+.row-end {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chevron {
+  flex: none;
+  color: var(--muted);
+  transition:
+    transform 150ms var(--ease-out),
+    color 150ms ease;
+}
+
+.row[aria-pressed='true'] .chevron {
+  color: var(--fg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover .chevron {
+    color: var(--fg);
+    transform: translateX(2px);
+  }
+}
+
 .contact {
   display: flex;
   flex-direction: column;
@@ -354,5 +381,9 @@ button:focus-visible {
 
   .column {
     transition: none;
+  }
+
+  .row:hover .chevron {
+    transform: none;
   }
 }
