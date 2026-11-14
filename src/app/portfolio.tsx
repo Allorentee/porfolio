@@ -138,8 +138,7 @@ export function Portfolio() {
                     onClick={() => toggle(experience.id)}
                   >
                     <span className="row-main">
-                      {active && <span aria-hidden="true" className="dot" />}
-                      <span>
+                      <span className="row-text">
                         <span className="strong">{experience.company}</span>{' '}
                         <span className="muted">{experience.role}</span>
                       </span>
@@ -170,7 +169,7 @@ export function Portfolio() {
                   rel="noopener noreferrer"
                 >
                   <span className="row-main">
-                    <span>
+                    <span className="row-text">
                       <span className="strong">{project.name}</span>{' '}
                       <span className="muted">{project.description}</span>
                     </span>
