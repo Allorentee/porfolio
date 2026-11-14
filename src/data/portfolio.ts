@@ -41,6 +41,12 @@ export const experiences: Experience[] = [
     periodLong: '2025 – hoy',
     summary:
       'Empresa especializada en productos con IA y en trabajar con IA: automatización de procesos y creación de proyectos.',
+    highlights: [
+      'Responsable de toda la parte frontend de los proyectos.',
+      'Automatización de tareas y seguridad.',
+      'Integraciones MCP y uso de skills con IA.',
+      'Mejora de un 60% en la productividad.',
+    ],
   },
   {
     id: 'ipglobal',
