@@ -83,11 +83,15 @@ function ExperienceDetail({ experience }: { experience: Experience }) {
       <p className="pretty" style={order(1)}>
         {experience.summary}
       </p>
-      <Highlights items={experience.highlights} i={2} />
-      <section aria-label="Stack" className="block" style={order(3)}>
-        <h3 className="label">Stack</h3>
-        <p>{experience.stack.join(' · ')}</p>
-      </section>
+      {experience.highlights && (
+        <Highlights items={experience.highlights} i={2} />
+      )}
+      {experience.stack && (
+        <section aria-label="Stack" className="block" style={order(3)}>
+          <h3 className="label">Stack</h3>
+          <p>{experience.stack.join(' · ')}</p>
+        </section>
+      )}
     </div>
   )
 }

@@ -11,8 +11,8 @@ export type Experience = {
   period: string
   periodLong: string
   summary: string
-  highlights: string[]
-  stack: string[]
+  highlights?: string[]
+  stack?: string[]
 }
 
 export type Project = {
@@ -27,56 +27,51 @@ export type Project = {
 
 export const profile = {
   name: 'Alvaro Llorente',
-  headline: 'Desarrollador full-stack en ipglobal · Segovia',
+  headline: 'Ingeniero de IA en Embermind · Segovia',
   intro:
     'Construyo producto de principio a fin, de la autenticación al último píxel.',
 }
 
 export const experiences: Experience[] = [
   {
-    id: 'ipglobal',
-    company: 'ipglobal',
-    role: 'Desarrollador full-stack',
-    period: '2024–',
-    periodLong: '2024 – hoy',
-    summary:
-      'Trabajo en Neleva, una plataforma sanitaria, cubriendo desde el acceso de pacientes y personal clínico hasta las herramientas que se usan en consulta.',
-    highlights: [
-      'Autenticación con Keycloak: passkeys para pacientes, contraseña y OTP para el personal clínico.',
-      'Backoffice y herramientas de consulta clínica con React y Formik.',
-      'Guía de usuario y plantillas de email para los flujos de acceso.',
-    ],
-    stack: ['NestJS', 'React', 'TypeScript', 'Keycloak', 'PostgreSQL'],
-  },
-  {
-    id: 'verifactu',
-    company: 'Facturación VeriFactu',
-    role: 'Producto propio',
+    id: 'embermind',
+    company: 'Embermind',
+    role: 'Ingeniero de IA',
     period: '2025–',
     periodLong: '2025 – hoy',
     summary:
-      'Una app de facturación para autónomos adaptada a VeriFactu, diseñada y desarrollada por mi cuenta de principio a fin.',
-    highlights: [
-      'Modelo de datos completo: clientes, series, documentos, vencimientos y pagos.',
-      'Facturas rectificativas (R1–R5) y encadenado de hashes.',
-      'Envío de registros a la AEAT por SOAP.',
-    ],
-    stack: ['NestJS', 'Prisma', 'Supabase', 'SOAP'],
+      'Empresa especializada en productos con IA y en trabajar con IA: automatización de procesos y creación de proyectos.',
   },
   {
-    id: 'aedas',
-    company: 'Aedas Homes',
-    role: 'Frontend',
-    period: '2023–2024',
-    periodLong: '2023 – 2024',
+    id: 'ipglobal',
+    company: 'IP Global',
+    role: 'Full-stack',
+    period: '2023–2025',
+    periodLong: 'mar 2023 – 2025',
     summary:
-      'Desarrollo de aplicaciones internas para distintas áreas de la compañía, de la comunicación en tiempo real a la visualización de mapas.',
+      'Trabajé en dos grandes proyectos, entre ellos Neleva, una plataforma sanitaria, cubriendo desde el acceso de pacientes y personal clínico hasta las herramientas que se usan en consulta.',
     highlights: [
-      'Comunicación cliente-servidor en tiempo real con WebSockets.',
-      'Organigramas interactivos y mapas con Mapbox.',
-      'Implementación parcial de microfrontends para la autorización de usuarios.',
+      'Autenticación con Keycloak: passkeys para pacientes, contraseña y OTP para el personal clínico.',
+      'Bundle un 40% más ligero y migración completa de webpack a Vite.',
+      'Eventos del servidor en tiempo real con SSE en un flujo pub/sub.',
+      'Carrito de compra limitado por sesión, detectando carritos abiertos en otro navegador.',
     ],
-    stack: ['React', 'TypeScript', 'WebSockets', 'Mapbox'],
+    stack: ['NestJS', 'React', 'TypeScript', 'Keycloak', 'PostgreSQL', 'Vite'],
+  },
+  {
+    id: 'lis',
+    company: 'Lis Data Solutions',
+    role: 'Full-stack',
+    period: '2021–2023',
+    periodLong: 'jul 2021 – mar 2023',
+    summary:
+      'Desarrollo y mantenimiento de 12 aplicaciones con React, con metodologías ágiles y trato directo con el cliente.',
+    highlights: [
+      'Frontal de una aplicación de chat con LLM para empresas.',
+      'Sistema de login con Azure.',
+      'Refactorización de código heredado, actualización de dependencias y mejoras de rendimiento.',
+    ],
+    stack: ['React', 'Azure'],
   },
 ]
 
@@ -114,10 +109,11 @@ export const projects: Project[] = [
     name: 'MenuVision',
     description: 'Carta digital para restaurantes',
     summary:
-      'Una carta digital QR para restaurantes, con filtros de alérgenos y preferencias, y un panel para mantenerla al día en tiempo real.',
+      'Un SaaS que cofundé en 2024: cartas QR en vídeo para restaurantes, dinámicas, con filtros de alérgenos y con control total desde un panel.',
     highlights: [
-      'Diseño de producto e interfaz en Figma, implementado de principio a fin.',
-      'Backoffice para cambiar precios, alérgenos y disponibilidad al instante.',
+      'Diseño UX/UI en Figma y app web pensada solo para móvil.',
+      'Backoffice que actualiza cada producto de la carta en tiempo real.',
+      'Servidores propios con CI/CD, nginx y certificados SSL.',
       'Landing estática con Astro para SEO y rendimiento.',
     ],
     href: 'https://menuvision.es',
