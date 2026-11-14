@@ -29,7 +29,7 @@ export const profile = {
   name: 'Alvaro Llorente',
   headline: 'Ingeniero de IA en Embermind · Segovia',
   intro:
-    'Construyo producto de principio a fin, de la autenticación al último píxel.',
+    'Construyo producto de principio a fin, del planteamiento al último píxel.',
 }
 
 export const experiences: Experience[] = [
