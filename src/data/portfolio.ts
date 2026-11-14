@@ -12,7 +12,6 @@ export type Experience = {
   periodLong: string
   summary: string
   highlights?: string[]
-  stack?: string[]
 }
 
 export type Project = {
@@ -62,7 +61,6 @@ export const experiences: Experience[] = [
       'Eventos del servidor en tiempo real con SSE en un flujo pub/sub.',
       'Carrito de compra limitado por sesión, detectando carritos abiertos en otro navegador.',
     ],
-    stack: ['NestJS', 'React', 'TypeScript', 'Keycloak', 'PostgreSQL', 'Vite'],
   },
   {
     id: 'lis',
@@ -77,7 +75,6 @@ export const experiences: Experience[] = [
       'Sistema de login con Azure.',
       'Refactorización de código heredado, actualización de dependencias y mejoras de rendimiento.',
     ],
-    stack: ['React', 'Azure'],
   },
 ]
 
