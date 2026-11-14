@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, type CSSProperties } from 'react'
 
 import {
@@ -8,6 +9,7 @@ import {
   profile,
   projects,
   type Experience,
+  type Project,
 } from '@/data/portfolio'
 
 const order = (i: number) => ({ '--i': i }) as CSSProperties
@@ -51,7 +53,25 @@ function ArrowUpRight() {
   )
 }
 
-function Detail({ experience }: { experience: Experience }) {
+function Highlights({ items, i }: { items: string[]; i: number }) {
+  return (
+    <section aria-label="A destacar" className="block" style={order(i)}>
+      <h3 className="label">A destacar</h3>
+      <ul className="bullets">
+        {items.map((item) => (
+          <li key={item}>
+            <span aria-hidden="true" className="muted">
+              –
+            </span>
+            <span className="pretty">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function ExperienceDetail({ experience }: { experience: Experience }) {
   return (
     <div className="detail">
       <div className="detail-head" style={order(0)}>
@@ -63,19 +83,7 @@ function Detail({ experience }: { experience: Experience }) {
       <p className="pretty" style={order(1)}>
         {experience.summary}
       </p>
-      <section aria-label="A destacar" className="block" style={order(2)}>
-        <h3 className="label">A destacar</h3>
-        <ul className="bullets">
-          {experience.highlights.map((item) => (
-            <li key={item}>
-              <span aria-hidden="true" className="muted">
-                –
-              </span>
-              <span className="pretty">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Highlights items={experience.highlights} i={2} />
       <section aria-label="Stack" className="block" style={order(3)}>
         <h3 className="label">Stack</h3>
         <p>{experience.stack.join(' · ')}</p>
@@ -84,16 +92,58 @@ function Detail({ experience }: { experience: Experience }) {
   )
 }
 
+function ProjectDetail({ project }: { project: Project }) {
+  const host = new URL(project.href).hostname
+  return (
+    <div className="detail">
+      <div className="detail-head" style={order(0)}>
+        <h2 className="title">{project.name}</h2>
+        <p className="muted">{project.description}</p>
+      </div>
+      <p className="pretty" style={order(1)}>
+        {project.summary}
+      </p>
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shot"
+        style={order(2)}
+        aria-label={`Abrir ${host}`}
+      >
+        <Image
+          src={project.image}
+          alt={`Captura de ${project.name}`}
+          sizes="280px"
+          placeholder="blur"
+        />
+      </a>
+      <Highlights items={project.highlights} i={3} />
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="visit"
+        style={order(4)}
+      >
+        Visitar {host}
+        <ArrowUpRight />
+      </a>
+    </div>
+  )
+}
+
 export function Portfolio() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  // Last opened experience, kept mounted while the panel fades out on close.
+  // Last opened item, kept mounted while the panel fades out on close.
   const [shownId, setShownId] = useState<string | null>(null)
   // True when the panel opens from the centred state, so its content waits for the column to slide.
   const [fromClosed, setFromClosed] = useState(false)
-  // Bumped on every open so reopening the same experience still remounts the detail
+  // Bumped on every open so reopening the same item still remounts the detail
   // and replays its delayed entry, instead of showing it under the sliding column.
   const [openCount, setOpenCount] = useState(0)
-  const shown = experiences.find((e) => e.id === shownId) ?? null
+  const shownExperience = experiences.find((e) => e.id === shownId)
+  const shownProject = projects.find((p) => p.id === shownId)
   const open = selectedId !== null
 
   function toggle(id: string) {
@@ -134,7 +184,7 @@ export function Portfolio() {
                     type="button"
                     className="row"
                     aria-pressed={active}
-                    aria-controls="experience-detail"
+                    aria-controls="detail"
                     onClick={() => toggle(experience.id)}
                   >
                     <span className="row-main">
@@ -160,23 +210,29 @@ export function Portfolio() {
           >
             <h2 className="label">Proyectos</h2>
             <div className="rows">
-              {projects.map((project) => (
-                <a
-                  key={project.href}
-                  href={project.href}
-                  className="row"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="row-main">
-                    <span className="row-text">
-                      <span className="strong">{project.name}</span>{' '}
-                      <span className="muted">{project.description}</span>
+              {projects.map((project) => {
+                const active = project.id === selectedId
+                return (
+                  <button
+                    key={project.id}
+                    type="button"
+                    className="row"
+                    aria-pressed={active}
+                    aria-controls="detail"
+                    onClick={() => toggle(project.id)}
+                  >
+                    <span className="row-main">
+                      <span className="row-text">
+                        <span className="strong">{project.name}</span>{' '}
+                        <span className="muted">{project.description}</span>
+                      </span>
                     </span>
-                  </span>
-                  <ArrowUpRight />
-                </a>
-              ))}
+                    <span className="row-end">
+                      <Chevron />
+                    </span>
+                  </button>
+                )
+              })}
             </div>
           </section>
 
@@ -203,16 +259,25 @@ export function Portfolio() {
         </div>
 
         <aside
-          id="experience-detail"
-          aria-label="Detalle de la experiencia"
+          id="detail"
+          aria-label="Detalle"
           aria-live="polite"
           className="aside"
           data-from-closed={fromClosed}
           inert={!open}
         >
           {/* `key` remounts the detail on each selection so its entry animation replays. */}
-          {shown && (
-            <Detail key={`${shown.id}-${openCount}`} experience={shown} />
+          {shownExperience && (
+            <ExperienceDetail
+              key={`${shownExperience.id}-${openCount}`}
+              experience={shownExperience}
+            />
+          )}
+          {shownProject && (
+            <ProjectDetail
+              key={`${shownProject.id}-${openCount}`}
+              project={shownProject}
+            />
           )}
         </aside>
       </main>

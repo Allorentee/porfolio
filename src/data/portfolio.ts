@@ -1,3 +1,9 @@
+import type { StaticImageData } from 'next/image'
+
+import finnesy from '@/assets/projects/finnesy.jpg'
+import intellisenseForms from '@/assets/projects/intellisense-forms.jpg'
+import menuvision from '@/assets/projects/menuvision.jpg'
+
 export type Experience = {
   id: string
   company: string
@@ -10,9 +16,13 @@ export type Experience = {
 }
 
 export type Project = {
+  id: string
   name: string
   description: string
+  summary: string
+  highlights: string[]
   href: string
+  image: StaticImageData
 }
 
 export const profile = {
@@ -72,19 +82,46 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
+    id: 'intellisense-forms',
     name: 'Intellisense Forms',
     description: 'Extensión de Chrome',
+    summary:
+      'Una extensión de Chrome que detecta cada campo de un formulario y lo rellena con datos realistas en español o inglés. Pensada para QA, desarrollo y demos que no parezcan de prueba.',
+    highlights: [
+      'Reconoce campos nativos, ARIA, shadow DOM, iframes y selects a medida.',
+      'Datos con formato real: DNI, NIE, IBAN, teléfonos, direcciones…',
+      'Rellenado con atajo de teclado y plantillas reutilizables, sin cuentas ni servidores.',
+    ],
     href: 'https://intellisenseforms.dev',
+    image: intellisenseForms,
   },
   {
+    id: 'finnesy',
     name: 'Finnesy',
     description: 'Finanzas personales',
+    summary:
+      'Una app web de finanzas personales que reúne cuentas, movimientos y presupuestos en un único panel, para ver el panorama completo sin hojas de cálculo.',
+    highlights: [
+      'Sincronización con bancos europeos vía PSD2.',
+      'Categorización automática de los movimientos.',
+      'Presupuestos por categoría que avisan antes de pasarte.',
+    ],
     href: 'https://finnesy.com',
+    image: finnesy,
   },
   {
+    id: 'menuvision',
     name: 'MenuVision',
     description: 'Carta digital para restaurantes',
+    summary:
+      'Una carta digital QR para restaurantes, con filtros de alérgenos y preferencias, y un panel para mantenerla al día en tiempo real.',
+    highlights: [
+      'Diseño de producto e interfaz en Figma, implementado de principio a fin.',
+      'Backoffice para cambiar precios, alérgenos y disponibilidad al instante.',
+      'Landing estática con Astro para SEO y rendimiento.',
+    ],
     href: 'https://menuvision.es',
+    image: menuvision,
   },
 ]
 

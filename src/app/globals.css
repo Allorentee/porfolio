@@ -286,6 +286,38 @@ button:focus-visible {
   flex: none;
 }
 
+/* Project screenshot: small, framed, and a second way into the site. */
+.shot {
+  display: block;
+  align-self: flex-start;
+  width: 100%;
+  max-width: 280px;
+  overflow: hidden;
+  border: 1px solid rgb(28 22 18 / 0.1);
+  border-radius: 4px;
+  background: rgb(28 22 18 / 0.04);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shot:hover img {
+    opacity: 0.85;
+  }
+}
+
+.visit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* ---------- Motion ---------- */
 
 /*
