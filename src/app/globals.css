@@ -5,6 +5,7 @@
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 *,
@@ -75,7 +76,6 @@ button:focus-visible {
 }
 
 .layout {
-  container-type: inline-size;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -389,7 +389,19 @@ button:focus-visible {
   animation-delay: calc(var(--i, 0) * 40ms + 230ms);
 }
 
-@container (min-width: 728px) {
+/*
+ * Breakpoint: 776px viewport = 728px of layout (340 column + 88 gap + 300 panel)
+ * plus the 24px page gutters. Viewport media queries (not container queries)
+ * decide it, because a query container would trap the mobile sheet's
+ * `position: fixed` inside the layout.
+ */
+@media (min-width: 776px) {
+  .layout {
+    /* Only needed here, for 100cqw in the centring offset. */
+    container-type: inline-size;
+    flex-wrap: nowrap;
+  }
+
   /*
    * Side by side, only the column decides the layout's height, so the page stays
    * centred on it whatever is open. The panel takes no height and its content
@@ -408,11 +420,74 @@ button:focus-visible {
     /* 100cqw = layout width, 100% = column width → offset that centres the column. */
     transform: translateX(calc((100cqw - 100%) / 2));
   }
+
+  .back {
+    display: none;
+  }
 }
 
-@container (max-width: 727.98px) {
+/*
+ * Mobile: the detail is a full-screen sheet that slides in from the right over
+ * the list, with a back button — instead of appearing below everything.
+ * Transitions (not keyframes) so a quick open/close retargets mid-flight;
+ * it leaves the way it came in.
+ */
+@media (max-width: 775.98px) {
+  .layout {
+    justify-content: center;
+  }
+
+  .aside {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 24px 48px;
+    background: var(--bg);
+    opacity: 1;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition:
+      transform 400ms var(--ease-drawer),
+      visibility 0s linear 400ms;
+  }
+
   .layout[data-open='false'] .aside {
-    display: none;
+    opacity: 1;
+  }
+
+  .layout[data-open='true'] .aside {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform 400ms var(--ease-drawer),
+      visibility 0s;
+  }
+
+  .detail {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* The sheet is already moving; the content only needs a short beat after it. */
+  .aside[data-from-closed='true'] .detail > * {
+    animation-delay: calc(var(--i, 0) * 40ms + 120ms);
+  }
+
+  .back {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: calc(100% + 48px);
+    max-width: none;
+    margin: 0 -24px 16px;
+    padding: 16px 24px 12px;
+    background: var(--bg);
+    color: var(--muted);
   }
 }
 
@@ -429,5 +504,27 @@ button:focus-visible {
 
   .row:hover .chevron {
     transform: none;
+  }
+}
+
+/* Reduced motion on mobile: the sheet fades in place instead of sliding. */
+@media (prefers-reduced-motion: reduce) and (max-width: 775.98px) {
+  .aside,
+  .layout[data-open='true'] .aside {
+    transform: none;
+    transition:
+      opacity 200ms ease,
+      visibility 0s linear 200ms;
+  }
+
+  .layout[data-open='false'] .aside {
+    opacity: 0;
+  }
+
+  .layout[data-open='true'] .aside {
+    opacity: 1;
+    transition:
+      opacity 200ms ease,
+      visibility 0s;
   }
 }

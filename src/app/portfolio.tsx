@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 
 import {
   contact,
@@ -13,6 +13,9 @@ import {
 } from '@/data/portfolio'
 
 const order = (i: number) => ({ '--i': i }) as CSSProperties
+
+// Keep in sync with the breakpoint in globals.css.
+const MOBILE_QUERY = '(max-width: 775.98px)'
 
 function Chevron() {
   return (
@@ -29,6 +32,24 @@ function Chevron() {
       strokeLinejoin="round"
     >
       <path d="M6 3.5L10.5 8L6 12.5" />
+    </svg>
+  )
+}
+
+function ChevronLeft() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="10"
+      height="10"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M10 3.5L5.5 8L10 12.5" />
     </svg>
   )
 }
@@ -144,16 +165,45 @@ export function Portfolio() {
   const shownProject = projects.find((p) => p.id === shownId)
   const open = selectedId !== null
 
-  function toggle(id: string) {
+  const asideRef = useRef<HTMLElement>(null)
+  const backRef = useRef<HTMLButtonElement>(null)
+  // Row that opened the detail, to hand focus back to it when the mobile sheet closes.
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+
+  function close() {
+    setSelectedId(null)
+    if (asideRef.current?.contains(document.activeElement)) {
+      triggerRef.current?.focus({ preventScroll: true })
+    }
+  }
+
+  function toggle(id: string, trigger: HTMLButtonElement) {
     if (selectedId === id) {
-      setSelectedId(null)
+      close()
       return
     }
+    triggerRef.current = trigger
     if (selectedId === null) setOpenCount((n) => n + 1)
     setFromClosed(selectedId === null)
     setSelectedId(id)
     setShownId(id)
   }
+
+  // On mobile the detail covers the screen: start it at the top and move focus into it.
+  useEffect(() => {
+    if (!open || !window.matchMedia(MOBILE_QUERY).matches) return
+    if (asideRef.current) asideRef.current.scrollTop = 0
+    backRef.current?.focus({ preventScroll: true })
+  }, [open, openCount])
+
+  useEffect(() => {
+    if (!open) return
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') close()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  })
 
   return (
     <div className="page">
@@ -183,7 +233,7 @@ export function Portfolio() {
                     className="row"
                     aria-pressed={active}
                     aria-controls="detail"
-                    onClick={() => toggle(experience.id)}
+                    onClick={(e) => toggle(experience.id, e.currentTarget)}
                   >
                     <span className="row-main">
                       <span className="row-text">
@@ -217,7 +267,7 @@ export function Portfolio() {
                     className="row"
                     aria-pressed={active}
                     aria-controls="detail"
-                    onClick={() => toggle(project.id)}
+                    onClick={(e) => toggle(project.id, e.currentTarget)}
                   >
                     <span className="row-main">
                       <span className="row-text">
@@ -257,6 +307,7 @@ export function Portfolio() {
         </div>
 
         <aside
+          ref={asideRef}
           id="detail"
           aria-label="Detalle"
           aria-live="polite"
@@ -264,6 +315,15 @@ export function Portfolio() {
           data-from-closed={fromClosed}
           inert={!open}
         >
+          <button
+            ref={backRef}
+            type="button"
+            className="back"
+            onClick={close}
+          >
+            <ChevronLeft />
+            Volver
+          </button>
           {/* `key` remounts the detail on each selection so its entry animation replays. */}
           {shownExperience && (
             <ExperienceDetail
