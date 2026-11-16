@@ -218,11 +218,11 @@ export function Portfolio() {
           </header>
 
           <section
-            aria-label="Experiencia"
+            aria-label="Experiencia más relevante"
             className="group reveal"
             style={order(1)}
           >
-            <h2 className="label">Experiencia</h2>
+            <h2 className="label">Experiencia más relevante</h2>
             <div className="rows">
               {experiences.map((experience) => {
                 const active = experience.id === selectedId
