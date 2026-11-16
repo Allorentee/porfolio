@@ -26,7 +26,7 @@ export type Project = {
 
 export const profile = {
   name: 'Alvaro Llorente',
-  headline: 'Ingeniero de IA en Embermind',
+  headline: 'Frontend con IA en Embermind',
   intro:
     'Construyo producto de principio a fin, del planteamiento al último píxel.',
 }
@@ -35,13 +35,13 @@ export const experiences: Experience[] = [
   {
     id: 'embermind',
     company: 'Embermind',
-    role: 'Ingeniero de IA',
+    role: 'Frontend con IA',
     period: '2025–',
     periodLong: '2025 – hoy',
     summary:
       'Empresa especializada en productos con IA y en trabajar con IA: automatización de procesos y creación de proyectos.',
     highlights: [
-      'Responsable de toda la parte frontend de los proyectos.',
+      'Responsable de toda la parte frontend del proyecto.',
       'Automatización de tareas y seguridad.',
       'Integraciones MCP y uso de skills con IA.',
       'Mejora de un 60% en la productividad.',
@@ -54,12 +54,12 @@ export const experiences: Experience[] = [
     period: '2023–2025',
     periodLong: 'mar 2023 – 2025',
     summary:
-      'Trabajé en dos grandes proyectos, entre ellos Neleva, una plataforma sanitaria, cubriendo desde el acceso de pacientes y personal clínico hasta las herramientas que se usan en consulta.',
+      'Trabajé en plataformas sanitarias, inmobiliarias y de e-commerce, desde el acceso de los usuarios hasta las herramientas de gestión.',
     highlights: [
       'Autenticación con Keycloak: passkeys para pacientes, contraseña y OTP para el personal clínico.',
       'Bundle un 40% más ligero y migración completa de webpack a Vite.',
       'Eventos del servidor en tiempo real con SSE en un flujo pub/sub.',
-      'Carrito de compra limitado por sesión, detectando carritos abiertos en otro navegador.',
+      'Gestión de carritos de compra.',
     ],
   },
   {
@@ -69,11 +69,13 @@ export const experiences: Experience[] = [
     period: '2021–2023',
     periodLong: 'jul 2021 – mar 2023',
     summary:
-      'Desarrollo y mantenimiento de 12 aplicaciones con React, con metodologías ágiles y trato directo con el cliente.',
+      'Trabajé para Aedas Homes, en el desarrollo y mantenimiento de 12 aplicaciones con React y con metodologías ágiles.',
     highlights: [
       'Frontal de una aplicación de chat con LLM para empresas.',
       'Sistema de login con Azure.',
       'Refactorización de código heredado, actualización de dependencias y mejoras de rendimiento.',
+      'Trabajo con canvas.',
+      'Trato directo con el cliente.',
     ],
   },
 ]
