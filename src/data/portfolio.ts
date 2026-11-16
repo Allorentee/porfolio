@@ -50,7 +50,7 @@ export const experiences: Experience[] = [
   {
     id: 'ipglobal',
     company: 'IP Global',
-    role: 'Full-stack',
+    role: 'Frontend',
     period: '2023–2025',
     periodLong: 'mar 2023 – 2025',
     summary:
